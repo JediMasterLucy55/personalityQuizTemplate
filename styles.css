@@ -1,11 +1,32 @@
-* {
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff0f6;
+  color: #333;
+  padding: 20px;
 }
 
-body {
-    background-color: #f0f8ff;
-    margin: 0;
-    padding: 20px;
+h1 {
+  color: #d63384;
+}
+
+.quiz-box {
+  background: #ffe6f0;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+button {
+  background: #ff85c0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #f759ab;
 }

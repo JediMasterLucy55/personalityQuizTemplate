@@ -1,153 +1,98 @@
-const result1 = "Result 1";
-const result2 = "Result 2";
-const result3 = "Result 3";
-const result4 = "Result 4";
+// Define possible results
+const result1 = "You’re a Visionary!";
+const result2 = "You’re a Strategist!";
+const result3 = "You’re a Creator!";
+const result4 = "You’re a Leader!";
 
+// Define questions and which results they contribute to
 const questions = [
-    {
-        question: "",
-        answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
-        ]
-    },
+  {
+    question: "What do you enjoy most?",
+    answers: [
+      { text: "Inventing things", results: [result1] },
+      { text: "Making plans", results: [result2] },
+      { text: "Designing or drawing", results: [result3] },
+      { text: "Organizing people", results: [result4] }
+    ]
+  },
+  {
+    question: "Pick a color:",
+    answers: [
+      { text: "Blue", results: [result1] },
+      { text: "Green", results: [result2] },
+      { text: "Pink", results: [result3] },
+      { text: "Red", results: [result4] }
+    ]
+  }
+];
 
-    {
-        question: "",
-        answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
-        ]
-    },
-
-    {
-        question: "",
-        answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
-        ]
-    },
-
-    {
-        question: "",
-        answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
-        ]
-    },
-
-    {
-        question: "",
-        answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
-        ]
-    }
-]
-
+// Load quiz questions into the form
 const form = document.getElementById("quiz");
 
 questions.forEach((q, qIndex) => {
-    const quizBox = document.createElement("div");
-    quizBox.classList.add("quiz-box");
+  const box = document.createElement("div");
+  const questionEl = document.createElement("h2");
+  questionEl.textContent = q.question;
+  box.appendChild(questionEl);
 
-    const questionText = document.createElement("h2");
-    questionText.textContent = q.question;
-    quizBox.appendChild(questionText);
+  q.answers.forEach((a, aIndex) => {
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = `question-${qIndex}`;
+    input.id = `q-${qIndex}-a-${aIndex}`;
+    input.value = JSON.stringify(a.results);
 
-    q.answers.forEach((a, aIndex) => {
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = `question-${qIndex}`;
-        input.id = `q-${qIndex}-a-${aIndex}`;
-        input.value = JSON.stringify(a.results);
+    const label = document.createElement("label");
+    label.htmlFor = input.id;
+    label.textContent = a.text;
 
-        const label = document.createElement("label");
-        label.htmlFor = input.id;
-        label.textContent = a.text;
+    box.appendChild(input);
+    box.appendChild(label);
+    box.appendChild(document.createElement("br"));
+  });
 
-        quizBox.appendChild(input);
-        quizBox.appendChild(label);
-        quizBox.appendChild(document.createElement("br"));
-    })
+  form.appendChild(box);
+});
 
-    form.appendChild(quizBox);
+// When the user clicks Submit
+document.getElementById("submit").addEventListener("click", (e) => {
+  e.preventDefault(); // Don't reload the page
 
-})
+  const counts = {
+    [result1]: 0,
+    [result2]: 0,
+    [result3]: 0,
+    [result4]: 0
+  };
 
-const submitButton = document.getElementById("submit");
-
-submitButton.addEventListener("click", (e) => {
-
-    e.preventDefault();
-
-    const counts = {
-        result1: 0,
-        result2: 0,
-        result3: 0,
-        result4: 0
-    };
-
-    questions.forEach((_, qIndex) => {
-        const selected = document.querySelector(`input[name="question-${qIndex}"]:checked`);
-        if (selected) {
-            const results = JSON.parse(selected.value);
-            results.forEach(result => {
-                if (result === result1) counts.result1++;
-                if (result === result2) counts.result2++;
-                if (result === result3) counts.result3++;
-                if (result === result4) counts.result4++;
-            });
-        }
-    })
-
-    let topResult = null;
-    let maxCount = 0;
-
-    for (let answer in counts) {
-        if (counts[answer] > maxCount) {
-            maxCount = counts[answer];
-            topResult = answer;
-        }
+  // Tally results
+  questions.forEach((_, qIndex) => {
+    const selected = document.querySelector(`input[name="question-${qIndex}"]:checked`);
+    if (selected) {
+      const results = JSON.parse(selected.value);
+      results.forEach(res => {
+        counts[res]++;
+      });
     }
+  });
 
-    if (topResult) {
-        window.location.href = `results.html?result=${topResult}`;
+  // Pick top result
+  let topResult = null;
+  let max = 0;
 
-    } else {
-        let randomResult = Math.floor(Math.random() * 4);
-
-        switch (randomResult) {
-            case 0:
-                randomResult = result1;
-                break;
-            case 1:
-                randomResult = result2;
-                break;
-            case 2:
-                randomResult = result3;
-                break;
-            case 3:
-                randomResult = result4;
-                break;
-        }
+  for (let res in counts) {
+    if (counts[res] > max) {
+      max = counts[res];
+      topResult = res;
     }
+  }
 
+  // Fallback if no answers selected
+  if (!topResult) {
+    const allResults = [result1, result2, result3, result4];
+    topResult = allResults[Math.floor(Math.random() * allResults.length)];
+  }
 
-
-    if (!topResult) {
-        topResult = randomResult;
-        window.location.href = `results.html?result=${topResult}`;
-    }
-
+  // Redirect to results page with result in URL
+  window.location.href = `results.html?result=${encodeURIComponent(topResult)}`;
 });
