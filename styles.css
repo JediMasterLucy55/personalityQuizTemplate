@@ -1,3 +1,5 @@
+/* feel free to change this to make it more aestethic! */
+
 * {
     text-align: center;
     font-family: 'Arial', sans-serif;
@@ -9,3 +11,8 @@ body {
     margin: 0;
     padding: 20px;
 }
+
+/* https://htmlcheatsheet.com/css/ */
+/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    This is a really good css interactive cheat sheet!
+ */

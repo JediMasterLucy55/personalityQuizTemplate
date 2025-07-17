@@ -1,16 +1,19 @@
+// here we will make variables that hold the result of the quiz! don't forget your semicolons!
+// const means the variable will never change, result1 is the name of the variable, and Result 1 is the string that the variable stores
 const result1 = "Result 1";
 const result2 = "Result 2";
 const result3 = "Result 3";
 const result4 = "Result 4";
 
+// makes an object called questions that stores the template for your questions. add the question itself into where it says Sample Question, the answers go into text, and the result variables go into the brackets. You can have more than one result per answer!
 const questions = [
     {
-        question: "",
+        question: "Sample Question",
         answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
+            {text: "A", results: [result1]},
+            {text: "B", results: [result2]},
+            {text: "C", results: [result3]},
+            {text: "D", results: [result4]}
         ]
     },
 
@@ -55,6 +58,7 @@ const questions = [
     }
 ]
 
+// Most of the stuff down here you will not have to edit, this will just put your questions into the website
 const form = document.getElementById("quiz");
 
 questions.forEach((q, qIndex) => {
@@ -85,12 +89,14 @@ questions.forEach((q, qIndex) => {
 
 })
 
+// and this will make the button go to the results page and give you your answer
 const submitButton = document.getElementById("submit");
 
 submitButton.addEventListener("click", (e) => {
 
     e.preventDefault();
 
+    // CHANGE THE VARIABLE NAMES HERE TO FIT YOUR VARIABLES
     const counts = {
         result1: 0,
         result2: 0,
@@ -103,6 +109,7 @@ submitButton.addEventListener("click", (e) => {
         if (selected) {
             const results = JSON.parse(selected.value);
             results.forEach(result => {
+                // CHANGE THE VARIABLE NAMES HERE TOO
                 if (result === result1) counts.result1++;
                 if (result === result2) counts.result2++;
                 if (result === result3) counts.result3++;
@@ -125,6 +132,7 @@ submitButton.addEventListener("click", (e) => {
         window.location.href = `results.html?result=${topResult}`;
 
     } else {
+        // AND HERE CHANGE THEM HERE
         const allResults = [result1, result2, result3, result4];
         topResult = allResults[Math.floor(Math.random() * allResults.length)];
 
@@ -138,3 +146,5 @@ submitButton.addEventListener("click", (e) => {
     }
 
 });
+
+// ask me, google, or ChatGPT if you are interested in what this code does specifically
