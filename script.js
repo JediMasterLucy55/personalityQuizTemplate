@@ -85,9 +85,12 @@ questions.forEach((q, qIndex) => {
 
 })
 
-const submitButton = document.createElement("button");
+const submitButton = document.getElementById("submit");
 
-submitButton.addEventListener("click", () => {
+submitButton.addEventListener("click", (e) => {
+
+    e.preventDefault();
+
     const counts = {
         result1: 0,
         result2: 0,
@@ -120,7 +123,6 @@ submitButton.addEventListener("click", () => {
 
     if (topResult) {
         window.location.href = `results.html?result=${topResult}`;
-        topResult.appendChild(p);
 
     } else {
         let randomResult = Math.floor(Math.random() * 4);

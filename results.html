@@ -9,5 +9,10 @@
 <body>
     <h1>Results</h1>
     <p id="results"></p>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const result = params.get("result");
+        document.getElementById("results").textContent = result || "No result found!";
+    </script>
 </body>
 </html>
