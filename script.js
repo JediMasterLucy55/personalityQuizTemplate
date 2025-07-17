@@ -1,56 +1,56 @@
-const result1 = "Result 1";
-const result2 = "Result 2";
-const result3 = "Result 3";
-const result4 = "Result 4";
+const summer = "summer";
+const spring = "spring";
+const winter = "winter";
+const fall = "fall";
 
 const questions = [
     {
-        question: "",
+        question: "What is your favorite food?",
         answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
+            {text: "S'mores", results: [summer]},
+            {text: "Pizza", results: [fall]},
+            {text: "Soup", results: [winter]},
+            {text: "Salad", results: [spring]}
         ]
     },
 
     {
-        question: "",
+        question: "What is your favorite color?",
         answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
+            {text: "Red", results: [fall]},
+            {text: "Yellow", results: [summer]},
+            {text: "Blue", results: [winter]},
+            {text: "Rainbow", results: [spring]}
         ]
     },
 
     {
-        question: "",
+        question: "What is your favorite vacation spot?",
         answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
+            {text: "beach", results: [summer]},
+            {text: "mountains", results: [winter]},
+            {text: "city", results: [fall]},
+            {text: "forest", results: [spring]}
         ]
     },
 
     {
-        question: "",
+        question: "If you had elemental abilities, which element would you want to control?",
         answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
+            {text: "fire", results: [winter]},
+            {text: "water", results: [summer]},
+            {text: "wind", results: [spring]},
+            {text: "earth", results: [fall]}
         ]
     },
 
     {
-        question: "",
+        question: "How many letters does your first name have?",
         answers: [
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []},
-            {text: "", results: []}
+            {text: "four", results: [fall]},
+            {text: "six", results: [summer]},
+            {text: "eight", results: [winter]},
+            {text: "other", results: [spring]}
         ]
     }
 ]
@@ -92,10 +92,10 @@ submitButton.addEventListener("click", (e) => {
     e.preventDefault();
 
     const counts = {
-        result1: 0,
-        result2: 0,
-        result3: 0,
-        result4: 0
+        summer: 0,
+        spring: 0,
+        winter: 0,
+        fall: 0
     };
 
     questions.forEach((_, qIndex) => {
@@ -103,10 +103,10 @@ submitButton.addEventListener("click", (e) => {
         if (selected) {
             const results = JSON.parse(selected.value);
             results.forEach(result => {
-                if (result === result1) counts.result1++;
-                if (result === result2) counts.result2++;
-                if (result === result3) counts.result3++;
-                if (result === result4) counts.result4++;
+                if (result === summer) counts.summer++;
+                if (result === spring) counts.spring++;
+                if (result === winter) counts.winter++;
+                if (result === fall) counts.fall++;
             });
         }
     })
