@@ -1,0 +1,151 @@
+const result1 = "Result 1";
+const result2 = "Result 2";
+const result3 = "Result 3";
+const result4 = "Result 4";
+
+const questions = [
+    {
+        question: "",
+        answers: [
+            {text: "", results: []},
+            {text: "", results: []},
+            {text: "", results: []},
+            {text: "", results: []}
+        ]
+    },
+
+    {
+        question: "",
+        answers: [
+            {text: "", results: []},
+            {text: "", results: []},
+            {text: "", results: []},
+            {text: "", results: []}
+        ]
+    },
+
+    {
+        question: "",
+        answers: [
+            {text: "", results: []},
+            {text: "", results: []},
+            {text: "", results: []},
+            {text: "", results: []}
+        ]
+    },
+
+    {
+        question: "",
+        answers: [
+            {text: "", results: []},
+            {text: "", results: []},
+            {text: "", results: []},
+            {text: "", results: []}
+        ]
+    },
+
+    {
+        question: "",
+        answers: [
+            {text: "", results: []},
+            {text: "", results: []},
+            {text: "", results: []},
+            {text: "", results: []}
+        ]
+    }
+]
+
+const form = document.getElementById("quiz");
+
+questions.forEach((q, qIndex) => {
+    const quizBox = document.createElement("div");
+    quizBox.classList.add("quiz-box");
+
+    const questionText = document.createElement("h2");
+    questionText.textContent = q.question;
+    quizBox.appendChild(questionText);
+
+    q.answers.forEach((a, aIndex) => {
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = `question-${qIndex}`;
+        input.id = `q-${qIndex}-a-${aIndex}`;
+        input.value = JSON.stringify(a.results);
+
+        const label = document.createElement("label");
+        label.htmlFor = input.id;
+        label.textContent = a.text;
+
+        quizBox.appendChild(input);
+        quizBox.appendChild(label);
+        quizBox.appendChild(document.createElement("br"));
+    })
+
+    form.appendChild(quizBox);
+
+})
+
+const submitButton = document.createElement("button");
+
+submitButton.addEventListener("click", () => {
+    const counts = {
+        result1: 0,
+        result2: 0,
+        result3: 0,
+        result4: 0
+    };
+
+    questions.forEach((_, qIndex) => {
+        const selected = document.querySelector(`input[name="question-${qIndex}"]:checked`);
+        if (selected) {
+            const results = JSON.parse(selected.value);
+            results.forEach(result => {
+                if (result === result1) counts.result1++;
+                if (result === result2) counts.result2++;
+                if (result === result3) counts.result3++;
+                if (result === result4) counts.result4++;
+            });
+        }
+    })
+
+    let topResult = null;
+    let maxCount = 0;
+
+    for (let answer in counts) {
+        if (counts[answer] > maxCount) {
+            maxCount = counts[answer];
+            topResult = answer;
+        }
+    }
+
+    if (topResult) {
+        window.location.href = `results.html?result=${topResult}`;
+        topResult.appendChild(p);
+
+    } else {
+        let randomResult = Math.floor(Math.random() * 4);
+
+        switch (randomResult) {
+            case 0:
+                randomResult = result1;
+                break;
+            case 1:
+                randomResult = result2;
+                break;
+            case 2:
+                randomResult = result3;
+                break;
+            case 3:
+                randomResult = result4;
+                break;
+        }
+    }
+
+
+
+    if (!topResult) {
+        topResult = randomResult;
+        window.location.href = `results.html?result=${topResult}`;
+    }
+
+});
