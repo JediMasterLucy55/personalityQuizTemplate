@@ -125,22 +125,9 @@ submitButton.addEventListener("click", (e) => {
         window.location.href = `results.html?result=${topResult}`;
 
     } else {
-        let randomResult = Math.floor(Math.random() * 4);
+        const allResults = [result1, result2, result3, result4];
+        topResult = allResults[Math.floor(Math.random() * allResults.length)];
 
-        switch (randomResult) {
-            case 0:
-                randomResult = result1;
-                break;
-            case 1:
-                randomResult = result2;
-                break;
-            case 2:
-                randomResult = result3;
-                break;
-            case 3:
-                randomResult = result4;
-                break;
-        }
     }
 
 
