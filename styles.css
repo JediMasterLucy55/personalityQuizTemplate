@@ -1,15 +1,15 @@
 /* feel free to change this to make it more aestethic! */
 
+/* the * means this applies to everything on the page */
 * {
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-
+    text-align: center; /* centers all text */
+    font-family: 'Arial', sans-serif; /* sets the font for the whole page */
 }
 
 body {
-    background-color: #f0f8ff;
-    margin: 0;
-    padding: 20px;
+    background-color: #f0f8ff; /* gives the background a light blue color */
+    margin: 0; /* removes default white space around the page */
+    padding: 20px; /* adds space inside the edges of the page */
 }
 
 /* https://htmlcheatsheet.com/css/ */
