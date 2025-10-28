@@ -142,5 +142,3 @@ submitButton.addEventListener("click", (e) => { // runs when button is clicked
     }
 
 });
-
-// ask me, google, or ChatGPT if you are interested in what this code does specifically
