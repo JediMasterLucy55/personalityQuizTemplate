@@ -10,13 +10,22 @@
     <h1>Results</h1>
     <p id="results"></p>
     <script>
-        // makes a variable called params that will never change. This variable will open a new tab
         const params = new URLSearchParams(window.location.search);
-        // makes a never changing variable called result, tells the params variable to grab the result of the quiz
-        const result = params.get("result");
-        // puts the result of the quiz into the html element that has the id of results, or it will add No Result Found! if there is an error
-        // || means or
-        document.getElementById("results").textContent = result || "No result found!";
+        const vision = params.get("result");
+
+        const resultBox = document.getElementById("final-result");
+        if (result) {
+            resultBox.textContent = result;
+        } else {
+            resultBox.textContent = "Oops! No result was provided.";
+        }
+        // // makes a variable called params that will never change. This variable will open a new tab
+        // const params = new URLSearchParams(window.location.search);
+        // // makes a never changing variable called result, tells the params variable to grab the result of the quiz
+        // const result = params.get("result");
+        // // puts the result of the quiz into the html element that has the id of results, or it will add No Result Found! if there is an error
+        // // || means or
+        // document.getElementById("results").textContent = result || "No result found!";
     </script>
 </body>
 </html>
